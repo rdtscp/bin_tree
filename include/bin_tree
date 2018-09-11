@@ -1,6 +1,6 @@
-#ifndef TRIE
+#ifndef BIN_TREE
 
-#define TRIE
-#include "Trie.h"
+#define BIN_TREE
+#include "bin_tree.h"
 
 #endif
