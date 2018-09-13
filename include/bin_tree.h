@@ -42,6 +42,18 @@ namespace ads {
         root->insert(element);
       }
 
+      /* Returns if an Element Exists in the Tree */
+      bool find(const T& element) {
+        if (root == nullptr)
+          return false;
+        return root->find(element);
+      }
+
+      /* Clears all Elements of the Binary Tree */
+      void clear() {
+        root.reset();
+      }
+
       /* Balance the Binary Tree */
       void balance() {
         root->balance();
@@ -50,6 +62,15 @@ namespace ads {
       std::vector<T> in_order() {
         std::vector<T> result = root->in_order();
         return result;
+      }
+
+      std::vector<T> pre_order() {
+        std::vector<T> output;
+
+      /* Temporary */
+      return in_order();
+
+        return output;
       }
 
     private:
