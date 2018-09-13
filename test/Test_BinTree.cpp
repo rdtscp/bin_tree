@@ -10,9 +10,21 @@ using namespace ads;
 
 /* Assert that a Default BinTree Constructs without error. */
 TEST(BinTreeTest, DefaultConstruction) {
-  bin_tree dict;
+  bin_tree<int> tree({2, 1, 3});
 
-	ASSERT_TRUE(true);
+	std::vector<int> expected 	= { 1, 2, 3 };
+	std::vector<int> actual		 	= tree.in_order();
+
+	bool result = true;
+	for (int i = 0; i < actual.size(); i++) {
+		if (expected[i] != actual[i]) {
+			result = false;
+			break;
+		}
+		std::cout << actual[i] << ", ";
+	}
+
+	ASSERT_TRUE(result);
 }
 // The fixture for testing class Project1. From google test primer.
 class Test_BinTree : public ::testing::Test {
