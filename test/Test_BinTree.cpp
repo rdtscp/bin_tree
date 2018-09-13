@@ -91,10 +91,30 @@ TEST(BinTreeTest, InsertElement) {
 
 	tree.insert(0);
 
-	ASSERT_TRUE(tree.find(1));
+	ASSERT_TRUE(tree.find(0));
 }
 
-// TEST(BinTreeTest)
+TEST(BinTreeTest, PreOrderTraversal) {
+	bin_tree<int> tree({10, 5, 2, 3, 4, 1, 8, 9, 7, 6});
+
+	std::vector<int> wrongPreOrder 	= { 10, 5, 2, 1, 3, 4, 8, 7, 6, 9 };
+	std::vector<int> rightPreOrder 	= { 10, 5, 2, 1, 3, 4, 8, 7, 6, 9 };
+	std::vector<int> actual					= tree.pre_order();
+
+	ASSERT_NE(actual, wrongPreOrder);
+	ASSERT_EQ(actual, rightPreOrder);
+}
+
+TEST(BinTreeTest, PostOrderTraversal) {
+	bin_tree<int> tree({10, 5, 2, 3, 4, 1, 8, 9, 7, 6});
+
+	std::vector<int> wrongPostOrder 	= { 1, 4, 3, 2, 6, 7, 9, 8, 5, 10 };
+	std::vector<int> rightPostOrder 	= { 1, 4, 3, 2, 6, 8, 10, 9, 7, 5 };
+	std::vector<int> actual					= tree.pre_order();
+
+	ASSERT_NE(actual, wrongPostOrder);
+	ASSERT_EQ(actual, rightPostOrder);
+}
 
 // The fixture for testing class Project1. From google test primer.
 class Test_BinTree : public ::testing::Test {
