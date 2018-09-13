@@ -21,7 +21,6 @@ TEST(BinTreeTest, DefaultConstruction) {
 			result = false;
 			break;
 		}
-		std::cout << actual[i] << ", ";
 	}
 
 	ASSERT_TRUE(result);
