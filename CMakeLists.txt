@@ -5,11 +5,6 @@ project(bin_tree)
 
 IF(CMAKE_BUILD_TYPE MATCHES Release)
   message(" --- Building in Release Mode ---")
-  add_library(bin_tree SHARED src/bin_tree.cpp src/bin_tree_node.cpp)
-  install(
-    TARGETS bin_tree
-    DESTINATION lib
-  )
   install(
     FILES include/bin_tree include/bin_tree.h include/bin_tree_node.h
     DESTINATION include
@@ -61,11 +56,6 @@ IF(CMAKE_BUILD_TYPE MATCHES Debug)
       )
     ENDIF(NOT GTEST_INSTALLED MATCHES TRUE)
 
-  add_library(bin_tree SHARED src/bin_tree.cpp src/bin_tree_node.cpp)
-  install(
-    TARGETS bin_tree
-    DESTINATION lib
-  )
   install(
     FILES include/bin_tree include/bin_tree.h include/bin_tree_node.h
     DESTINATION include
