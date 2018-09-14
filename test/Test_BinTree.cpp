@@ -15,7 +15,7 @@ TEST(BinTreeTest, DefaultConstruction) {
 	ASSERT_FALSE(tree.find(1));
 }
 
-TEST(BinTreeTest, InitializerListConstructor) {
+TEST(BinTreeTest, VectorConstructor) {
 	bin_tree<int> tree({2, 1, 3});
 
 	ASSERT_FALSE(tree.find(0));
@@ -26,18 +26,10 @@ TEST(BinTreeTest, InitializerListConstructor) {
 	std::vector<int> expected 	= { 1, 2, 3 };
 	std::vector<int> actual			= tree.in_order();
 
-	bool result = true;
-	for (int i = 0; i < actual.size(); i++) {
-		if (expected[i] != actual[i]) {
-			result = false;
-			break;
-		}
-	}
-
-	ASSERT_TRUE(result);
+	ASSERT_EQ(actual, expected);
 }
 
-TEST(BinTreeTest, VectorConstructor) {
+TEST(BinTreeTest, InitializerListConstructor) {
 	bin_tree<int> tree = {2, 1, 3};
 
 	ASSERT_FALSE(tree.find(0));
@@ -48,15 +40,7 @@ TEST(BinTreeTest, VectorConstructor) {
 	std::vector<int> expected 	= { 1, 2, 3 };
 	std::vector<int> actual			= tree.in_order();
 
-	bool result = true;
-	for (int i = 0; i < actual.size(); i++) {
-		if (expected[i] != actual[i]) {
-			result = false;
-			break;
-		}
-	}
-
-	ASSERT_TRUE(result);
+	ASSERT_EQ(actual, expected);
 }
 
 TEST(BinTreeTest, InOrderTraversal) {
@@ -110,7 +94,7 @@ TEST(BinTreeTest, PostOrderTraversal) {
 
 	std::vector<int> wrongPostOrder 	= { 1, 4, 3, 2, 6, 7, 9, 8, 5, 10 };
 	std::vector<int> rightPostOrder 	= { 1, 4, 3, 2, 6, 8, 10, 9, 7, 5 };
-	std::vector<int> actual					= tree.pre_order();
+	std::vector<int> actual						= tree.pre_order();
 
 	ASSERT_NE(actual, wrongPostOrder);
 	ASSERT_EQ(actual, rightPostOrder);
