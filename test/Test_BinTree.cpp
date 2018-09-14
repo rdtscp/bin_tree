@@ -79,24 +79,20 @@ TEST(BinTreeTest, InsertElement) {
 }
 
 TEST(BinTreeTest, PreOrderTraversal) {
-	bin_tree<int> tree({10, 5, 2, 3, 4, 1, 8, 9, 7, 6});
+	bin_tree<int> tree({1, 2, 3, 4, 5, 6, 7});
 
-	std::vector<int> wrongPreOrder 	= { 10, 5, 2, 1, 3, 4, 8, 7, 6, 9 };
-	std::vector<int> rightPreOrder 	= { 10, 5, 2, 1, 3, 4, 8, 7, 6, 9 };
+	std::vector<int> rightPreOrder 	= { 4, 2, 1, 3, 6, 5, 7 };
 	std::vector<int> actual					= tree.pre_order();
 
-	ASSERT_NE(actual, wrongPreOrder);
 	ASSERT_EQ(actual, rightPreOrder);
 }
 
 TEST(BinTreeTest, PostOrderTraversal) {
-	bin_tree<int> tree({10, 5, 2, 3, 4, 1, 8, 9, 7, 6});
+	bin_tree<int> tree({1, 2, 3, 4, 5, 6, 7});
 
-	std::vector<int> wrongPostOrder 	= { 1, 4, 3, 2, 6, 7, 9, 8, 5, 10 };
-	std::vector<int> rightPostOrder 	= { 1, 4, 3, 2, 6, 8, 10, 9, 7, 5 };
-	std::vector<int> actual						= tree.pre_order();
+	std::vector<int> rightPostOrder  { 1, 3, 2, 5, 7, 6, 4 };
+	std::vector<int> actual					= tree.post_order();
 
-	ASSERT_NE(actual, wrongPostOrder);
 	ASSERT_EQ(actual, rightPostOrder);
 }
 
