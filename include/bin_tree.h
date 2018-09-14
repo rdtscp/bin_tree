@@ -3,6 +3,7 @@
 
 #include <memory>
 #include <vector>
+#include <algorithm>
 #include <functional>
 
 #include "bin_tree_node.h"
@@ -21,18 +22,15 @@ namespace ads {
 
       /* Takes in a vector of elements, and constructs a binary tree. */
       bin_tree<T>(std::vector<T> elements) {
-        for (const T& element: elements) {
-          insert(element);
-        }
-        balance();
+        std::sort(elements.begin(), elements.end());
+        root = std::unique_ptr<bin_tree_node<T>>(new bin_tree_node<T>(elements));
       }
 
       /* Initialiser-List Constructor */
-      bin_tree<T>(std::initializer_list<T> elements) {
-        for (const T& element: elements) {
-          insert(element);
-        }
-        balance();
+      bin_tree<T>(const std::initializer_list<T>& elements) {
+        std::vector<T> elems = elements;
+        std::sort(elems.begin(), elems.end());
+        root = std::unique_ptr<bin_tree_node<T>>(new bin_tree_node<T>(elems));
       }
 
       /* Insert an Element. */
@@ -49,33 +47,41 @@ namespace ads {
         return root->find(element);
       }
 
+      /* Balance the Binary Tree */
+      void balance() {
+        std::vector<T> order = in_order();
+
+
+      }
+
+      std::vector<T> in_order() {
+        if (root == nullptr)
+          return {};
+
+        return root->in_order();
+      }
+
+      std::vector<T> pre_order() {
+        if (root == nullptr)
+          return {};
+
+        return root->pre_order();
+      }
+
+      std::vector<T> post_order() {
+        if (root == nullptr)
+          return {};
+
+        return root->post_order();
+      }
+
       /* Clears all Elements of the Binary Tree */
       void clear() {
         root.reset();
       }
 
-      /* Balance the Binary Tree */
-      void balance() {
-        root->balance();
-      }
-
-      std::vector<T> in_order() {
-        std::vector<T> result = root->in_order();
-        return result;
-      }
-
-      std::vector<T> pre_order() {
-        std::vector<T> output;
-
-      /* Temporary */
-      return in_order();
-
-        return output;
-      }
-
     private:
 
-      int height = 0;
       std::unique_ptr<bin_tree_node<T>> root;
 
   };
