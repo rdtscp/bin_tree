@@ -73,6 +73,7 @@ class bin_tree_node {
       // @TODO
     }
 
+    /* Return a vector of the In-Order Traversal. */
     std::vector<T> in_order() {
       std::vector<T> output = {};
       
@@ -91,6 +92,7 @@ class bin_tree_node {
       return output;
     }
     
+    /* Return a vector of the Pre-Order Traversal. */
     std::vector<T> pre_order() {
       std::vector<T> output = {};
 
@@ -110,6 +112,7 @@ class bin_tree_node {
       return output;
     }
 
+    /* Return a vector of the Post-Order Traversal. */
     std::vector<T> post_order() {
       std::vector<T> output = {};
 
