@@ -12,11 +12,23 @@ class bin_tree_node {
 
   public:
 
-    /* Default Constructor */
-    bin_tree_node<T>() {}
-
-    /* Construct with a Value */
+    /* Construct a Node of this Element */
     bin_tree_node<T>(const T& element) : value(element) {}
+
+    /* Construct a List of Elements */
+    bin_tree_node<T>(std::vector<T> elements) {
+      T midElem           = getMiddle(elements);
+      std::vector<T> lhs  = getLHS(elements);
+      std::vector<T> rhs  = getRHS(elements);
+
+      value = midElem;
+
+      if (lhs.size() > 0)
+        left = std::unique_ptr<bin_tree_node<T>>(new bin_tree_node<T>(lhs));
+
+      if (rhs.size() > 0)
+        right = std::unique_ptr<bin_tree_node<T>>(new bin_tree_node<T>(rhs));
+    }
 
     /* Insert an Element. */
     void insert(const T& element) {
@@ -24,13 +36,13 @@ class bin_tree_node {
         if (left != nullptr)
           left->insert(element);
         else
-          left = std::unique_ptr<bin_tree_node<T>>(new bin_tree_node(element));
+          left = std::unique_ptr<bin_tree_node<T>>(new bin_tree_node<T>(element));
       }
       else if (element > value) {
         if (right != nullptr)
           right->insert(element);
         else
-          right = std::unique_ptr<bin_tree_node<T>>(new bin_tree_node(element));
+          right = std::unique_ptr<bin_tree_node<T>>(new bin_tree_node<T>(element));
       }
       else {
         value = element;
@@ -62,7 +74,7 @@ class bin_tree_node {
     }
 
     std::vector<T> in_order() {
-      std::vector<T> output       = {};
+      std::vector<T> output = {};
       
       if (left != NULL) {
         std::vector<T> leftOrder    = left->in_order();
@@ -78,12 +90,40 @@ class bin_tree_node {
 
       return output;
     }
-
+    
     std::vector<T> pre_order() {
-      std::vector<T> output;
+      std::vector<T> output = {};
 
-      /* Temporary */
-      return in_order();
+      output.push_back(value);
+
+      if (left != NULL) {
+        std::vector<T> leftOrder    = left->pre_order();
+        output.insert(output.end(), leftOrder.begin(), leftOrder.end());
+      }
+      
+      if (right != NULL) {
+        std::vector<T> rightOrder   = right->pre_order();
+        output.insert(output.end(), rightOrder.begin(), rightOrder.end());
+      }
+
+
+      return output;
+    }
+
+    std::vector<T> post_order() {
+      std::vector<T> output = {};
+
+      if (left != nullptr) {
+        std::vector<T> leftOrder    = left->post_order();
+        output.insert(output.end(), leftOrder.begin(), leftOrder.end());
+      }
+      
+      if (right != nullptr) {
+        std::vector<T> rightOrder   = right->post_order();
+        output.insert(output.end(), rightOrder.begin(), rightOrder.end());
+      }
+
+      output.push_back(value);
 
       return output;
     }
@@ -93,6 +133,51 @@ class bin_tree_node {
     T value;
     std::unique_ptr<bin_tree_node<T>> left;
     std::unique_ptr<bin_tree_node<T>> right;
+
+    T getMiddle(const std::vector<T>& list) {
+      int middleIdx = (list.size() - 1) / 2;
+      return list[middleIdx];
+    }
+
+    std::vector<T> getLHS(std::vector<T> list) {
+      if (list.size() == 0) {
+        return {};
+      }
+      if (list.size() == 1) {
+        return {};
+      }
+      if (list.size() == 2) {
+        return { };
+      }
+      int middleIdx = (list.size() - 1) / 2;
+      if (middleIdx > 0 && middleIdx < list.size()) {
+        std::vector<T> output = std::vector<T>(list.begin(), list.begin() + middleIdx);
+        return output;
+      }
+      else {
+        return {};
+      }
+    }
+
+    std::vector<T> getRHS(std::vector<T> list) {
+      if (list.size() == 0) {
+        return {};
+      }
+      if (list.size() == 1) {
+        return {};
+      }
+      if (list.size() == 2) {
+        return { list[1] };
+      }
+      int middleIdx = (list.size() - 1) / 2;
+      if (middleIdx > 0 && middleIdx < list.size()) {
+        std::vector<T> output = std::vector<T>(list.begin() + (middleIdx + 1), list.end());
+        return output;
+      }
+      else {
+        return {};
+      }
+    }
 
 };
 
