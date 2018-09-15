@@ -50,8 +50,8 @@ namespace ads {
       /* Balance the Binary Tree */
       void balance() {
         std::vector<T> order = in_order();
-
-
+        clear();
+        root = std::unique_ptr<bin_tree_node<T>>(new bin_tree_node<T>(elements));
       }
 
       std::vector<T> in_order() {
