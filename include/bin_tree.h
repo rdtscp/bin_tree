@@ -51,7 +51,7 @@ namespace ads {
       void balance() {
         std::vector<T> order = in_order();
         clear();
-        root = std::unique_ptr<bin_tree_node<T>>(new bin_tree_node<T>(elements));
+        root = std::unique_ptr<bin_tree_node<T>>(new bin_tree_node<T>(order));
       }
 
       std::vector<T> in_order() {
