@@ -43,6 +43,33 @@ TEST(BinTreeTest, InitializerListConstructor) {
 	ASSERT_EQ(actual, expected);
 }
 
+TEST(BinTreeTest, CopyConstructor) {
+	bin_tree<int> tree({1, 2, 3});
+
+	ASSERT_TRUE(tree.find(2));
+
+	bin_tree<int> tree_copy(tree);
+
+	ASSERT_TRUE(tree.find(2));
+	ASSERT_TRUE(tree_copy.find(2));
+}
+
+TEST(BinTreeTest, AssignmentCopy) {
+	bin_tree<int> tree({1, 2, 3});
+
+	ASSERT_TRUE(tree.find(2));
+
+	bin_tree<int> tree_copy = tree;
+
+	ASSERT_TRUE(tree.find(2));
+	ASSERT_TRUE(tree_copy.find(2));
+
+	tree_copy = tree_copy;
+
+	ASSERT_TRUE(tree.find(2));
+	ASSERT_TRUE(tree_copy.find(2));
+}
+
 TEST(BinTreeTest, InOrderTraversal) {
 	bin_tree<int> tree({10, 5, 2, 3, 4, 1, 8, 9, 7, 6});
 
