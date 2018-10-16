@@ -33,6 +33,22 @@ namespace ads {
         root = std::unique_ptr<bin_tree_node<T>>(new bin_tree_node<T>(elems));
       }
 
+      /* Copy Constructor */
+      bin_tree<T>(const bin_tree<T>& copy) {
+        std::vector<T> elements = copy.in_order();
+        root = std::unique_ptr<bin_tree_node<T>>(new bin_tree_node<T>(elements));
+      }
+
+      /* Assignment Operator */
+      bin_tree<T>& operator=(const bin_tree<T>& rhs) {
+        if (&rhs == this) {
+          return *this;
+        }
+        std::vector<T> elements = rhs.in_order();
+        root = std::unique_ptr<bin_tree_node<T>>(new bin_tree_node<T>(elements));
+        return *this;
+      }
+
       /* Insert an Element. */
       void insert(const T& element) {
         if (root == nullptr)
@@ -41,7 +57,7 @@ namespace ads {
       }
 
       /* Returns if an Element Exists in the Tree */
-      bool find(const T& element) {
+      bool find(const T& element) const {
         if (root == nullptr)
           return false;
         return root->find(element);
@@ -54,21 +70,21 @@ namespace ads {
         root = std::unique_ptr<bin_tree_node<T>>(new bin_tree_node<T>(order));
       }
 
-      std::vector<T> in_order() {
+      std::vector<T> in_order() const {
         if (root == nullptr)
           return {};
 
         return root->in_order();
       }
 
-      std::vector<T> pre_order() {
+      std::vector<T> pre_order() const {
         if (root == nullptr)
           return {};
 
         return root->pre_order();
       }
 
-      std::vector<T> post_order() {
+      std::vector<T> post_order() const {
         if (root == nullptr)
           return {};
 
