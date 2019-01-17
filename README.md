@@ -1,5 +1,5 @@
 # Binary Tree
-[![Build Status](https://travis-ci.com/acwilson96/bin_tree.svg?branch=master)](https://travis-ci.com/acwilson96/bin_tree)
+[![Build Status](https://travis-ci.com/rdtscp/bin_tree.svg?branch=master)](https://travis-ci.com/rdtscp/bin_tree)
 ![License](https://img.shields.io/badge/License-MIT-brightgreen.svg)
 
 Binary Tree implementation in C++. Built using CMake and Google Test. 
